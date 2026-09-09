@@ -43,7 +43,7 @@ services:
     network_mode: "host"
     volumes:
       - ./adguard-data:/opt/adguardhome/work
-      - ./AdGuardHome.yaml:/opt/adguardhome/conf/AdGuardHome.yaml
+      - ./adguard-conf:/opt/adguardhome/conf
     deploy:
       resources:
         limits:
