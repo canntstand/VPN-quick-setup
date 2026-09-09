@@ -4,7 +4,7 @@ services:
     container_name: wg-easy
     environment:
       - LANG=en
-      - WG_HOST=31.57.93.135
+      - WG_HOST=_
       - PORT=51821
       - WG_PORT=51820
       - WG_DEFAULT_ADDRESS=10.8.0.x
@@ -19,7 +19,7 @@ services:
       - INIT_ENABLED=true
       - INIT_USERNAME=_
       - INIT_PASSWORD=_
-      - INIT_HOST=31.57.93.135
+      - INIT_HOST=_
       - INIT_PORT=51820
     volumes:
       - ./wg-easy-data:/etc/wireguard
