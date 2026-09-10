@@ -16,11 +16,6 @@ services:
       - OVERRIDE_AUTO_AWG=awg
       - INSECURE=true
       - WG_DEVICE=eth0
-      - INIT_ENABLED=true
-      - INIT_USERNAME=_
-      - INIT_PASSWORD=_
-      - INIT_HOST=_
-      - INIT_PORT=51820
     volumes:
       - ./wg-easy-data:/etc/wireguard
       - /lib/modules:/lib/modules:ro
