@@ -19,6 +19,8 @@ services:
       - INIT_ENABLED=true
       - INIT_USERNAME=${ADMIN_USER}
       - INIT_PASSWORD=${ADMIN_PASSWORD}
+      - WG_POST_UP=iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT
+      - WG_POST_DOWN=iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT
       - INIT_HOST=${IP}
       - INIT_PORT=51820
     volumes:
@@ -89,6 +91,5 @@ services:
       - -c
       - |
         apk add --no-cache apache2-utils gettext
-        export ADGUARD_PASSWORD_HASH=$(htpasswd -B -n -b "$ADMIN_USER" "$ADMIN_PASSWORD" | cut -d ":" -f 2)
-        export ADGUARD_PASSWORD_HASH=$(echo "$ADGUARD_PASSWORD_HASH" | sed 's/\$/\$\$/g')
+        export ADGUARD_PASSWORD_HASH=$$(htpasswd -B -n -b "$$ADMIN_USER" "$$ADMIN_PASSWORD" | cut -d ":" -f 2)
         envsubst < /config/AdGuardHome.yaml.template > /config/AdGuardHome.yaml
